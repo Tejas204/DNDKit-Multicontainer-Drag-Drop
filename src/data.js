@@ -1,5 +1,4 @@
-export const cardsArray_1 = {
-    column: 1,
+export const cardsArray = {
     cards_1: [
         {
             id: 1,
@@ -20,6 +19,20 @@ export const cardsArray_1 = {
         {
             id: 5,
             name: "Card 5"
+        }
+    ],
+    cards_2: [    
+        {
+            id: 6,
+            name: "Card 6"
+        },
+        {
+            id: 7,
+            name: "Card 7"
+        },
+        {
+            id: 8,
+            name: "Card 8"
         }
     ]
 }

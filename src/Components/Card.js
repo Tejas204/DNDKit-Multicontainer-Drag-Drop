@@ -2,7 +2,7 @@ import React from 'react'
 import { cardsArray } from '../data'
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { useDraggable } from '@dnd-kit/core';
+import { useDraggable, useDroppable } from '@dnd-kit/core';
 
 const Card = ({id, name}) => {
 
