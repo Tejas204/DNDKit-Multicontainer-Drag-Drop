@@ -42,15 +42,17 @@ const Boards = () => {
     const {active, over} = event;
     console.log(active);
     console.log(over)
+
+    var myObj = {id: over.id, name:"Card 8"}
     
     
     //Fetch the column Id of over
-    var cardKeys = Object.values(cards.cards_1);
+    var cardKeys = Object.values(cards);
     cardKeys.map((cardKey) => {
-      console.log(cardKey["id"]);
+      console.log(Object.entries(cardKey))
     })
     
-    console.log(cardKeys);
+    //console.log(cardKeys);
     //console.log(cardValues[1][0]['name']);
   }
 
