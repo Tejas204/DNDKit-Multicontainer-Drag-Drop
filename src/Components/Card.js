@@ -16,10 +16,7 @@ const Card = ({id, name}) => {
     transform,
     transition,
   } = useSortable({
-    id: id,
-    data:{
-        type: 'card',
-    }
+    id: id
     });
   
   const style = {
