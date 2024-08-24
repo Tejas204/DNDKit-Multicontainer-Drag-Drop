@@ -18,23 +18,24 @@ const Boards = () => {
    * @Returns: array [int]
    */
   const findColumn = (id) => {
+    //If item is dropped in some other area
     if(!id){
       return null;
     }
 
+    //If item is dropped over a column
     if(cards.some((c) => c.id == id)){
       return cards.find((c) => c.id == id)
     }
 
+    //Create a flatmap like {card.id, column.id} from the cards
     const itemWithColumnId = cards.flatMap((c) => {
       const columnId = c.id;
       return c.cards.map((i) => ({itemId: i.id, columnId: columnId}));
     })
 
-    console.log(itemWithColumnId)
-
+    //find the record with matching item id, return column id
     const columnId = itemWithColumnId.find((i) => i.itemId == id);
-    console.log(columnId)
     return cards.find((c) => c.id == columnId.columnId)
   }
 
