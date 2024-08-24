@@ -17,8 +17,25 @@ const Boards = () => {
    * @Params: element
    * @Returns: array [int]
    */
-  const findColumn = (element) => {
-    return element.data.current.sortable.items;
+  const findColumn = (id) => {
+    if(!id){
+      return null;
+    }
+
+    if(cards.some((c) => c.id == id)){
+      return cards.find((c) => c.id == id)
+    }
+
+    const itemWithColumnId = cards.flatMap((c) => {
+      const columnId = c.id;
+      return c.cards.map((i) => ({itemId: i.id, columnId: columnId}));
+    })
+
+    console.log(itemWithColumnId)
+
+    const columnId = itemWithColumnId.find((i) => i.itemId == id);
+    console.log(columnId)
+    return cards.find((c) => c.id == columnId.columnId)
   }
 
   /**
@@ -33,6 +50,10 @@ const Boards = () => {
 
   const handleDragOver = (event) => {
     const {active, over} = event;
+
+    const activeColumn = findColumn(active.id);
+    const overColumn = over ? findColumn(over.id) : null;
+    console.log(activeColumn, overColumn)
   }
 
 
