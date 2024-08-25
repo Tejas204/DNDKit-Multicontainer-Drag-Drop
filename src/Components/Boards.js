@@ -45,8 +45,22 @@ const Boards = () => {
    */
   const handleDragEnd = (event) => {
     const {active, over} = event;
-    console.log(active);
-    console.log(over);
+    
+    //Find active and over column
+    const activeColumn = findColumn(active.id);
+    const overColumn = over ? findColumn(over.id) : null;
+
+    //If the element is dropped over the same column, 
+    //find old & new index of the element
+    if(activeColumn && overColumn && activeColumn.id === overColumn.id){
+      const oldIndex = activeColumn.cards.findIndex((c) => c.id == active.id);
+      const newIndex = activeColumn.cards.findIndex((c) => c.id == over.id);
+      const activeCards = activeColumn.cards;
+
+      setCards((activeCards) => {
+        return arrayMove(activeCards, oldIndex, newIndex);
+      })
+    }
   }
 
   const handleDragOver = (event) => {
