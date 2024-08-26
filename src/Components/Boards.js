@@ -57,8 +57,18 @@ const Boards = () => {
       const newIndex = activeColumn.cards.findIndex((c) => c.id == over.id);
       const activeCards = activeColumn.cards;
 
+      //Return the new column structure
       setCards((activeCards) => {
-        return arrayMove(activeCards, oldIndex, newIndex);
+        return activeCards.map((column) => {
+          //If the active column id matches the column id
+          if(column.id == activeColumn.id){
+            column.cards = arrayMove(activeColumn.cards, oldIndex, newIndex);
+            return column;
+          }
+          else{
+            return column;
+          }
+        })
       })
     }
   }
