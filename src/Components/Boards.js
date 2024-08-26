@@ -73,6 +73,10 @@ const Boards = () => {
     }
   }
 
+  /**
+   * Function: handles dragging action, determines if card moved to another container
+   * @Params: Drag end event
+   */
   const handleDragOver = (event) => {
     const {active, over} = event;
 
