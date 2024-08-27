@@ -46,21 +46,6 @@ export const cardArray = [
 ]
 
 
-export const cardArray_2 = [    
-        {
-            id: 6,
-            name: "Card 6"
-        },
-        {
-            id: 7,
-            name: "Card 7"
-        },
-        {
-            id: 8,
-            name: "Card 8"
-        }
-    ]
-
 export const columnsArray = [
     {
         id: 1,
