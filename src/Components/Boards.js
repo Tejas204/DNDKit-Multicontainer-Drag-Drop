@@ -82,7 +82,21 @@ const Boards = () => {
 
     const activeColumn = findColumn(active.id);
     const overColumn = over ? findColumn(over.id) : null;
-    console.log(activeColumn, overColumn)
+    
+    if(activeColumn.id != overColumn.id){
+      var myObj = {id:10, name:"Card 10"};
+      setCards((overCards) => {
+        return overCards.map((column) => {
+          if(column.id == overColumn.id){
+            column.cards = [...overColumn.cards, myObj];
+            return column;
+          }
+          else{
+            return column;
+          }
+        })
+      })
+    }
   }
 
 
