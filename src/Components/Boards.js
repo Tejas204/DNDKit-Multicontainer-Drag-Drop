@@ -83,6 +83,8 @@ const Boards = () => {
     const activeColumn = findColumn(active.id);
     const overColumn = over ? findColumn(over.id) : null;
     
+    //If card is moved to a different column
+    //Insert a new card temporarily
     if(activeColumn.id != overColumn.id){
       var myObj = {id:10, name:"Card 10"};
       setCards((overCards) => {
