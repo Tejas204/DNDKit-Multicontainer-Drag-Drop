@@ -103,6 +103,8 @@ const Boards = () => {
 
 
   return (
+    // Start of the content for drag and drop
+    // Place columns
     <DndContext onDragEnd={handleDragEnd} collisionDetection={closestCorners} onDragOver={handleDragOver}>
       <div className='flex flex-row p-8 gap-x-10 justify-center items-center'>
         {
