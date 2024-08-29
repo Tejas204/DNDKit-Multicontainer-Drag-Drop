@@ -18,6 +18,8 @@ const Columns = ({id, name, cards}) => {
             <p className='text-3xl font-bold text-center'>
                 {name}
             </p>
+            {/* Define sortable context for each column
+              * Apply Vertical sorting strategy to cards */}
             <SortableContext items={cards} strategy={verticalListSortingStrategy}>
                 <div className='flex flex-col gap-y-5 p-6' ref={setNodeRef}>
                 {
