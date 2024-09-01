@@ -56,7 +56,6 @@ const Boards = () => {
     if(activeColumn && overColumn && activeColumn.id === overColumn.id){
       const oldIndex = activeColumn.cards.findIndex((c) => c.id == active.id);
       const newIndex = activeColumn.cards.findIndex((c) => c.id == over.id);
-      const activeCards = activeColumn.cards;
 
       //Return the new column structure
       setCards((activeCards) => {
