@@ -35,7 +35,7 @@ export const cardArray = [
             },
             {
                 id: 7,
-                name: "Card 6"
+                name: "Card 7"
             },
             {
                 id: 8,
