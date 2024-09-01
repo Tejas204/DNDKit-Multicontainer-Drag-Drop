@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { columnsArray, cardArray } from '../data'
-import { closestCorners, DndContext, useDroppable } from '@dnd-kit/core';
+import { closestCorners, DndContext, DragOverlay, useDroppable } from '@dnd-kit/core';
 import Columns from './Columns';
 import { arrayMove } from '@dnd-kit/sortable';
+import Card from './Card';
 
 const Boards = () => {
 
@@ -10,7 +11,7 @@ const Boards = () => {
    * Hook: set the card array
    */
   const [cards, setCards] = useState(cardArray);
-  const [columns, setColumns] = useState(columnsArray);
+ 
 
   /**
    * Function: returns the array to which the element belongs
@@ -73,32 +74,51 @@ const Boards = () => {
     }
   }
 
+
   /**
    * Function: handles dragging action, determines if card moved to another container
    * @Params: Drag end event
    */
   const handleDragOver = (event) => {
-    const {active, over} = event;
+    const {active, over, delta} = event;
 
     const activeColumn = findColumn(active.id);
     const overColumn = over ? findColumn(over.id) : null;
+
+    if(!activeColumn || !overColumn || activeColumn == overColumn){
+      return null;
+    }
     
     //If card is moved to a different column
     //Insert a new card temporarily
-    if(activeColumn.id != overColumn.id){
-      var myObj = {id:10, name:"Card 10"};
-      setCards((overCards) => {
-        return overCards.map((column) => {
-          if(column.id == overColumn.id){
-            column.cards = [...overColumn.cards, myObj];
-            return column;
-          }
-          else{
-            return column;
-          }
-        })
-      })
-    }
+    setCards((prevState) => {
+      const activeCards = activeColumn.cards;
+      const overCards = overColumn.cards;
+
+      const activeIndex = activeCards.findIndex((c) => c.id == active.id);
+      const overIndex = activeCards.findIndex((c) => c.id == over.id);
+
+      //If item is placed below last item
+      const newIndex = () => {
+        const putBelowLastItem = overIndex == overCards.length -1 && delta.y > 0;
+        const modifier = putBelowLastItem ? 1: 0;
+        return overIndex >= 0 ? overIndex + modifier : overCards.length + 1;
+      }
+
+      return(prevState.map((c) => {
+        if(c.id == activeColumn.id){
+          c.cards = activeCards.filter((card) => card.id != active.id);
+          return c;
+        }
+        else if(c.id == overColumn.id){
+          c.cards = [...overCards.slice(0, newIndex()), activeCards[activeIndex], ...overCards.slice(newIndex(), overCards.length)];
+          return c;
+        }
+        else{
+          return c;
+        }
+      }))
+    });
   }
 
 
