@@ -106,14 +106,17 @@ const Boards = () => {
       }
 
       return(prevState.map((c) => {
+        //Remove the active card from the active column
         if(c.id == activeColumn.id){
           c.cards = activeCards.filter((card) => card.id != active.id);
           return c;
         }
+        //Place the active card in the over column
         else if(c.id == overColumn.id){
           c.cards = [...overCards.slice(0, newIndex()), activeCards[activeIndex], ...overCards.slice(newIndex(), overCards.length)];
           return c;
         }
+        //Return cards as is
         else{
           return c;
         }
