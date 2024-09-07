@@ -26,7 +26,6 @@ const Boards = () => {
 
     //If item is dropped over a column
     if(cards.some((c) => c.id == id)){
-      console.log("I am here");
       return cards.find((c) => c.id == id)
     }
 
