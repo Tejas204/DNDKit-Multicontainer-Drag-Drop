@@ -1,6 +1,6 @@
 export const cardArray = [
     {
-        id: 1,
+        id: 100,
         name: "Column 1",
         cards: [
             {
@@ -26,7 +26,7 @@ export const cardArray = [
         ]
     },
     {
-        id: 2,
+        id: 200,
         name: "Column 2",
         cards: [
             {
