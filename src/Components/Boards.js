@@ -7,7 +7,12 @@ import {
   useDroppable,
 } from "@dnd-kit/core";
 import Columns from "./Columns";
-import { arrayMove } from "@dnd-kit/sortable";
+import {
+  arrayMove,
+  horizontalListSortingStrategy,
+  SortableContext,
+  useSortable,
+} from "@dnd-kit/sortable";
 import Card from "./Card";
 
 const Boards = () => {
@@ -15,6 +20,7 @@ const Boards = () => {
    * Hook: set the card array
    */
   const [cards, setCards] = useState(cardArray);
+  console.log(cards);
 
   /**
    * Function: returns the array to which the element belongs
@@ -49,6 +55,7 @@ const Boards = () => {
    */
   const handleDragEnd = (event) => {
     const { active, over } = event;
+    console.log(active);
 
     //Find active and over column
     const activeColumn = findColumn(active.id);
@@ -138,16 +145,18 @@ const Boards = () => {
       onDragOver={handleDragOver}
     >
       <div className="flex flex-row p-8 gap-x-10 justify-center items-center">
-        {cards.map((column) => {
-          return (
-            <Columns
-              id={column.id}
-              name={column.name}
-              cards={column.cards}
-              key={column.id}
-            ></Columns>
-          );
-        })}
+        <SortableContext items={cards} strategy={horizontalListSortingStrategy}>
+          {cards.map((column) => {
+            return (
+              <Columns
+                id={column.id}
+                name={column.name}
+                cards={column.cards}
+                key={column.id}
+              ></Columns>
+            );
+          })}
+        </SortableContext>
       </div>
     </DndContext>
   );
