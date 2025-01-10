@@ -20,7 +20,6 @@ const Boards = () => {
    * Hook: set the card array
    */
   const [cards, setCards] = useState(cardArray);
-  console.log(cards);
 
   /**
    * Function: returns the array to which the element belongs
@@ -55,7 +54,6 @@ const Boards = () => {
    */
   const handleDragEnd = (event) => {
     const { active, over } = event;
-    console.log(active);
 
     //Find active and over column
     const activeColumn = findColumn(active.id);
@@ -79,6 +77,12 @@ const Boards = () => {
           }
         });
       });
+    } else if (activeColumn && overColumn && activeColumn.id != overColumn.id) {
+      setCards((prev) => {
+        const oldIndex = prev.indexOf(activeColumn);
+        const newIndex = prev.indexOf(overColumn);
+        return arrayMove(prev, oldIndex, newIndex);
+      });
     }
   };
 
@@ -88,6 +92,7 @@ const Boards = () => {
    */
   const handleDragOver = (event) => {
     const { active, over, delta } = event;
+    console.log(over);
 
     const activeColumn = findColumn(active.id);
     const overColumn = over ? findColumn(over.id) : null;
