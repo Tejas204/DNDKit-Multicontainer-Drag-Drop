@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { act, useEffect, useState } from "react";
 import { columnsArray, cardArray } from "../data";
 import {
   closestCorners,
@@ -111,7 +111,8 @@ const Boards = () => {
       const overCards = overColumn.cards;
 
       const activeIndex = activeCards.findIndex((c) => c.id == active.id);
-      const overIndex = activeCards.findIndex((c) => c.id == over.id);
+      const overIndex = overCards.findIndex((c) => c.id == over.id);
+      console.log(activeIndex ? "true" : "false");
 
       //If item is placed below last item
       const newIndex = () => {
@@ -123,12 +124,12 @@ const Boards = () => {
 
       return prevState.map((c) => {
         //Remove the active card from the active column
-        if (c.id == activeColumn.id) {
+        if (c.id == activeColumn.id && activeIndex >= 0 && overIndex >= 0) {
           c.cards = activeCards.filter((card) => card.id != active.id);
           return c;
         }
         //Place the active card in the over column
-        else if (c.id == overColumn.id) {
+        else if (c.id == overColumn.id && activeIndex >= 0 && overIndex >= 0) {
           c.cards = [
             ...overCards.slice(0, newIndex()),
             activeCards[activeIndex],

@@ -15,7 +15,6 @@ const Columns = ({ id, name, cards }) => {
    */
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id: id });
-  console.log(cards);
 
   const style = {
     transform: CSS.Transform.toString(transform),
