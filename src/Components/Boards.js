@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { columnsArray, cardArray } from "../data";
 import {
   closestCorners,
@@ -20,6 +20,10 @@ const Boards = () => {
    * Hook: set the card array
    */
   const [cards, setCards] = useState(cardArray);
+
+  // useEffect(() => {
+  //   console.log(cards);
+  // }, [cards]);
 
   /**
    * Function: returns the array to which the element belongs
@@ -92,7 +96,6 @@ const Boards = () => {
    */
   const handleDragOver = (event) => {
     const { active, over, delta } = event;
-    console.log(over);
 
     const activeColumn = findColumn(active.id);
     const overColumn = over ? findColumn(over.id) : null;
